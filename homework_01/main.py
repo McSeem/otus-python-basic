@@ -3,14 +3,20 @@
 Функции и структуры данных
 """
 
+DEGREE = 2
 
-def power_numbers():
+
+def square(item) -> int:
+    """ Функция возведения в квадрат. """
+    return item ** DEGREE
+
+
+def power_numbers(*numbers) -> list:
     """
     функция, которая принимает N целых чисел,
-    и возвращает список квадратов этих чисел
-    >>> power_numbers(1, 2, 5, 7)
-    <<< [1, 4, 25, 49]
+    и возвращает список квадратов этих чисел.
     """
+    return list(map(square, numbers))
 
 
 # filter types
@@ -25,8 +31,11 @@ def filter_numbers():
     и возвращает только чётные/нечётные/простые числа
     (выбор производится передачей дополнительного аргумента)
 
-    >>> filter_numbers([1, 2, 3], ODD)
+    #>>> filter_numbers([1, 2, 3], ODD)
     <<< [1, 3]
-    >>> filter_numbers([2, 3, 4, 5], EVEN)
+    #>>> filter_numbers([2, 3, 4, 5], EVEN)
     <<< [2, 4]
     """
+
+
+print(power_numbers(1, 2, 5, 7, 9))

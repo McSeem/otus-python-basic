@@ -25,17 +25,21 @@ EVEN = "even"
 PRIME = "prime"
 
 NEXT_NUMBER = 1
-DEEGRE_ORDER = 2
+DEEGRE_ORDER = 0.5
 BASE_DIVIDER = 2
 ZERO = 0
+EXCLUDED_RIGHT_BORDER = 2
 
 
 def is_prime(number) -> bool:
     """ Функция определяет, является ли число простым. """
-    for item in range(BASE_DIVIDER, (number//DEEGRE_ORDER) + NEXT_NUMBER):
+    if number < EXCLUDED_RIGHT_BORDER:
+        return False
+    for item in range(BASE_DIVIDER, int(number ** DEEGRE_ORDER + NEXT_NUMBER)):
         if number % item == ZERO:
             return False
-    return True
+    else:
+        return True
 
 
 def is_even(number) -> bool:
@@ -67,3 +71,6 @@ def filter_numbers(numbers, filter_type) -> list:
 
     return list(result)
 
+
+result = filter_numbers([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], PRIME)
+print(result)

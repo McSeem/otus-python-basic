@@ -67,6 +67,3 @@ def filter_numbers(numbers, filter_type) -> list:
 
     return list(result)
 
-
-filtered = filter_numbers([1, 2, 3, 6, 9], PRIME)
-print(filtered)

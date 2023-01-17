@@ -1,5 +1,5 @@
 from abc import ABC
-from exceptions import CargoOverload, LowFuelError, NotEnoughFuel
+from homework_02.exceptions import CargoOverload, LowFuelError, NotEnoughFuel
 
 
 class Vehicle(ABC):
@@ -20,11 +20,11 @@ class Vehicle(ABC):
                 raise LowFuelError()
 
     def move(self, distance: float):
-        fuel_required = self.fuel / self.fuel_consumption
+        fuel_required = distance * self.fuel_consumption
 
-        if fuel_required >= self.fuel:
+        if fuel_required <= self.fuel:
             self.fuel -= fuel_required
         else:
-            raise NotEnoughFuel
+            raise NotEnoughFuel()
 
 

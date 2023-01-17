@@ -6,10 +6,13 @@ from .exceptions import CargoOverload
 """
 
 class Plane(Vehicle):
-    cargo: float = 10.5
+    cargo: float = 0
     max_cargo: float
 
-    def __init__(self, max_cargo: float):
+    def __init__(self, weight: float, fuel: float, fuel_consumption: float, max_cargo: float):
+        self.weight = weight
+        self.fuel = fuel
+        self.fuel_consumption = fuel_consumption
         self.max_cargo = max_cargo
 
     def load_cargo(self, add_cargo: float):

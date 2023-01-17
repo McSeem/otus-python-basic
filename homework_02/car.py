@@ -7,7 +7,9 @@ from .engine import Engine
 
 
 class Car(Vehicle):
+    """ Класс описывает автомобиль. """
     engine = "Diesel"
 
-    def set_engine(self, engine: Engine):
+    def set_engine(self, engine: Engine) -> None:
+        """ Метод устанавливает двигатель для автомобиля. """
         self.engine = engine

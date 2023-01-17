@@ -19,3 +19,9 @@ class Plane(Vehicle):
             self.cargo = total_cargo
         else:
             raise CargoOverload
+
+    def remove_all_cargo(self) -> float:
+        stored_cargo = self.cargo
+        self.cargo = 0
+
+        return stored_cargo

@@ -11,7 +11,13 @@ class Plane(Vehicle):
 
     CARGO_EMPTY = 0
 
-    def __init__(self, weight: float, fuel: float, fuel_consumption: float, max_cargo: float):
+    def __init__(
+        self,
+        weight: float = 100.0,
+        fuel: float = 100.0,
+        fuel_consumption: float = 100.0,
+        max_cargo: float = 100.0
+    ) -> None:
         """ Конструктор. """
         self.weight = weight
         self.fuel = fuel

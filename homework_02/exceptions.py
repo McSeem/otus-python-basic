@@ -19,5 +19,3 @@ class NotEnoughFuel(Exception):
 class CargoOverload(Exception):
     """ Исключение для случая перегрузки летательного аппарата. """
     pass
-
-

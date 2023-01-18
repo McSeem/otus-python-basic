@@ -1,5 +1,5 @@
 from abc import ABC
-from homework_02.exceptions import CargoOverload, LowFuelError, NotEnoughFuel
+from homework_02.exceptions import LowFuelError, NotEnoughFuel
 
 
 class Vehicle(ABC):
@@ -8,7 +8,12 @@ class Vehicle(ABC):
 
     FUEL_EMPTY = 0
 
-    def __init__(self, weight: float, fuel: float, fuel_consumption: float) -> None:
+    def __init__(
+        self,
+        weight: float = 100.0,
+        fuel: float = 100.0,
+        fuel_consumption: float = 100.0
+    ) -> None:
         """ Конструктор. """
         self.weight = weight
         self.fuel = fuel
@@ -30,5 +35,3 @@ class Vehicle(ABC):
             self.fuel -= fuel_required
         else:
             raise NotEnoughFuel()
-
-

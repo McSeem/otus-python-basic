@@ -1,5 +1,7 @@
 # IDEs
 .idea/
+.kdev4/
+otus-python-basic.kdev4
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

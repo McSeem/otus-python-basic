@@ -1,0 +1,25 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x12\x00H\x00o\x00m\x00e\x00w\x00o\x00r\x00k\x00s)
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=scriptAppLauncher
+Name=Local Python3
+Type=Script Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+EnvironmentGroup=
+Executable=
+Execute on Remote Host=false
+Interpreter=python3
+Output Filtering Mode=2
+Remote Host=
+Run current file=true
+Working Directory=
+
+[Project]
+VersionControlSupport=kdevgit

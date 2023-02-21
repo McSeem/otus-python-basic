@@ -1,13 +1,5 @@
 from fastapi import FastAPI
+from views.pingpong.views import router as ping_router
 
 app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"hello": "root"}
-
-@app.get("/hello")
-def hello(name: str = "Home"):
-    return {
-        "message": f"Hello, {name}!",
-    }
+app.include_router(ping_router)

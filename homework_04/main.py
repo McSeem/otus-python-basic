@@ -16,11 +16,23 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 import config
+import asyncio
+import jsonplaceholder_requests
 
 from models import Base, Session
 
+
 async def async_main():
-    pass
+    urls = [jsonplaceholder_requests.USERS_DATA_URL, jsonplaceholder_requests.POSTS_DATA_URL]
+    initial_data_tasks = []
+
+    for source in urls:
+        initial_data_tasks.append(asyncio.create_task(jsonplaceholder_requests.fetch_json(source)))
+
+    results = await asyncio.gather(*initial_data_tasks)
+
+    for result in results:
+        print(result)
 
 
 def main():
@@ -29,3 +41,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    asyncio.run(async_main())

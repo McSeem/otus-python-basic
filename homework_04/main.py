@@ -23,16 +23,16 @@ from models import Base, Session
 
 
 async def async_main():
-    urls = [jsonplaceholder_requests.USERS_DATA_URL, jsonplaceholder_requests.POSTS_DATA_URL]
-    initial_data_tasks = []
+    users_data: []
+    posts_data: []
 
-    for source in urls:
-        initial_data_tasks.append(asyncio.create_task(jsonplaceholder_requests.fetch_json(source)))
+    users_data, posts_data = await asyncio.gather(
+        jsonplaceholder_requests.fetch_users_data(jsonplaceholder_requests.USERS_DATA_URL),
+        jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
+    )
 
-    results = await asyncio.gather(*initial_data_tasks)
-
-    for result in results:
-        print(result)
+    print(users_data)
+    print(posts_data)
 
 
 def main():

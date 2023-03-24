@@ -14,11 +14,28 @@ POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts"
 
 async def fetch_json(url: str):
     response = urlopen(url)
-    print(f"Отправлен запрос для получения пользователей...")
 
     json_data = json.loads(response.read())
 
     print(type(json_data))
-    print(json_data)
 
     return json_data
+
+
+async def fetch_users_data(url: str):
+    if not url:
+        return
+
+    users_data = await fetch_json(url)
+
+    return users_data
+
+
+async def fetch_posts_data(url: str):
+    if not url:
+        return
+
+    posts_data = await fetch_json(url)
+
+    return posts_data
+

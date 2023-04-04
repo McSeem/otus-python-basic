@@ -20,7 +20,7 @@ class Base:
         return str(self)
 
 
-engine = create_engine(url=config.DB_URL, echo=config.DB_ECHO)
+engine = create_engine(url=config.SQLALCHEMY_PG_CONN_URI, echo=config.DB_ECHO)
 
 Base = declarative_base(cls=Base, bind=engine)
 
@@ -28,4 +28,4 @@ session_factory = sessionmaker(bind=engine)
 Session = scoped_session(session_factory)
 
 
-Base = declarative_base()
+#Base = declarative_base()

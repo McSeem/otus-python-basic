@@ -33,6 +33,8 @@ async def async_main():
 
     print(users_data)
     print(posts_data)
+    print(config.SQLALCHEMY_PG_CONN_URI)
+    print(Base.metadata)
 
 
 def main():

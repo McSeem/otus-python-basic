@@ -9,8 +9,9 @@
 """
 
 import os
+import base
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:testpass@localhost:5432/blog"
 
-Base = None
-Session = None
+Base = base.Base
+Session = base.Session

@@ -17,8 +17,6 @@ async def fetch_json(url: str):
 
     json_data = json.loads(response.read())
 
-    print(type(json_data))
-
     return json_data
 
 

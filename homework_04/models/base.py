@@ -26,6 +26,3 @@ Base = declarative_base(cls=Base, bind=engine)
 
 session_factory = sessionmaker(bind=engine)
 Session = scoped_session(session_factory)
-
-
-#Base = declarative_base()

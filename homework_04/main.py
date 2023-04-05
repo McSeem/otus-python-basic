@@ -19,7 +19,8 @@ import config
 import asyncio
 import jsonplaceholder_requests
 
-from models import Base, Session
+# from models import Base, Session
+from models.models import *
 
 
 async def async_main():
@@ -31,14 +32,13 @@ async def async_main():
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
 
-    print(users_data)
-    print(posts_data)
-    print(config.SQLALCHEMY_PG_CONN_URI)
-    print(Base.metadata)
+
+def create_database():
+    Base.metadata.create_all()
 
 
 def main():
-    pass
+    create_database()
 
 
 if __name__ == "__main__":

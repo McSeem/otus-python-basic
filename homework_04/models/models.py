@@ -8,10 +8,34 @@
 создайте связи relationship между моделями: User.posts и Post.user
 """
 
-import os
-import base
+from sqlalchemy import (
+    MetaData,
+    Table,
+    Column,
+    Integer,
+    String,
+    Boolean,
+    DateTime
+)
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:testpass@localhost:5432/blog"
+from datetime import datetime
 
-Base = base.Base
-Session = base.Session
+from homework_04.models import Base
+
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    username = Column(String(30), unique=True)
+    name = Column(String(30), unique=False)
+    email = Column(String(30), unique=True)
+    created_at = Column(DateTime, default=datetime.utcnow())
+
+
+class Post(Base):
+    __tablename__ = "posts"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String(30), unique=False)
+    title = Column(String(30), unique=False)
+    body = Column(String(30), unique=False)
+    created_at = Column(DateTime, default=datetime.utcnow())

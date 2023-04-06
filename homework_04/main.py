@@ -27,6 +27,7 @@ async def async_main():
     users_data: []
     posts_data: []
 
+    # Загрузка пользователей и постов
     users_data, posts_data = await asyncio.gather(
         jsonplaceholder_requests.fetch_users_data(jsonplaceholder_requests.USERS_DATA_URL),
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),

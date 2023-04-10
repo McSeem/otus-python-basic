@@ -43,4 +43,4 @@ class Post(Base):
     title = Column(String(150), unique=False)
     body = Column(String(300), unique=False)
     created_at = Column(DateTime, default=datetime.utcnow())
-    #user = relationship("User", backref="posts")
+    user = relationship("User", back_populates="posts")

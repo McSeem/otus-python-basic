@@ -14,6 +14,7 @@
 """
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+import crud
 
 import config
 import asyncio
@@ -32,6 +33,9 @@ async def async_main():
         jsonplaceholder_requests.fetch_users_data(jsonplaceholder_requests.USERS_DATA_URL),
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
+
+    crud.load_users(users_data)
+    crud.load_users_posts(posts_data)
 
 
 def create_database():

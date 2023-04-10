@@ -40,7 +40,7 @@ class Post(Base):
     __tablename__ = "posts"
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"), unique=False)
-    title = Column(String(30), unique=False)
-    body = Column(String(30), unique=False)
+    title = Column(String(150), unique=False)
+    body = Column(String(300), unique=False)
     created_at = Column(DateTime, default=datetime.utcnow())
-    user = relationship("User", backref="post")
+    #user = relationship("User", backref="posts")

@@ -12,11 +12,9 @@
   (используйте полученные из запроса данные, передайте их в функцию для добавления в БД)
 - закрытие соединения с БД
 """
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+
 import crud
 
-import config
 import asyncio
 import jsonplaceholder_requests
 

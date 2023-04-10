@@ -9,18 +9,14 @@
 """
 
 from sqlalchemy import (
-    MetaData,
-    Table,
     Column,
     Integer,
     String,
-    Boolean,
     DateTime,
     ForeignKey
 )
 
 from datetime import datetime
-
 from sqlalchemy.orm import relationship
 
 from homework_04.models import Base

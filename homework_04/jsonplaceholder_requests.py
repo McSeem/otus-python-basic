@@ -2,7 +2,6 @@
 создайте асинхронные функции для выполнения запросов к ресурсам (используйте aiohttp)
 """
 
-import asyncio
 import json
 
 import aiohttp

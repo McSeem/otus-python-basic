@@ -22,6 +22,7 @@ import jsonplaceholder_requests
 
 # from models import Base, Session
 from models.models import *
+from models.base import Session
 
 
 async def async_main():
@@ -34,8 +35,16 @@ async def async_main():
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
 
-    crud.load_users(users_data)
-    crud.load_users_posts(posts_data)
+    # Создание сессии работы с БД
+    session = Session()
+
+    # Подготовка списков данных пользователей и постов и добавдение их в сессию БД
+    session.add_all(crud.load_users(users_data))
+    session.add_all(crud.load_users_posts(posts_data))
+
+    # Запись данных в БД
+    session.commit()
+    session.close()
 
 
 def create_database():

@@ -1,4 +1,5 @@
 import random
+from typing import List
 
 from models.models import Post, User
 
@@ -12,8 +13,8 @@ from models.base import Session
 """
 
 
-def load_users(users):
-    session = Session()
+def load_users(users: List) -> List:
+    users_records = []
 
     for user in users:
         user_record = User()
@@ -22,14 +23,13 @@ def load_users(users):
         user_record.name = user["name"]
         user_record.email = user["email"]
 
-        session.add(user_record)
+        users_records.append(user_record)
 
-    session.commit()
-    session.close()
+    return users_records
 
 
-def load_users_posts(posts):
-    session = Session()
+def load_users_posts(posts: List) -> List:
+    posts_records = []
 
     for post in posts:
         post_record = Post()
@@ -38,7 +38,6 @@ def load_users_posts(posts):
         post_record.title = post["title"]
         post_record.body = post["body"]
 
-        session.add(post_record)
+        posts_records.append(post_record)
 
-    session.commit()
-    session.close()
+    return posts_records

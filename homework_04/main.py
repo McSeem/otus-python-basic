@@ -18,6 +18,7 @@ SQLALCHEMY_SQLITE_CONN_URI = "sqlite:///db/blog.db"
 DB_TYPE = 1
 
 """
+import sys
 
 import crud
 
@@ -39,6 +40,11 @@ async def async_main():
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
 
+    print(users_data)
+    print(posts_data)
+
+    #sys.exit()
+
     # Создание сессии работы с БД
     session = Session()
 
@@ -56,6 +62,7 @@ def create_database():
 
 
 def main():
+    pass
     create_database()
 
 

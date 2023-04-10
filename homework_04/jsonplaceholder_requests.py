@@ -12,11 +12,16 @@ POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts"
 
 
 async def fetch_json(url: str):
-    response = urlopen(url)
+    session = aiohttp.ClientSession()
 
-    json_data = json.loads(response.read())
+    async with session.get(url) as response:
+        if response.status != 200:
+            response.raise_for_status()
 
-    return json_data
+        session.close()
+
+        return await response.text()
+
 
 
 async def fetch_users_data(url: str):
@@ -25,7 +30,7 @@ async def fetch_users_data(url: str):
 
     users_data = await fetch_json(url)
 
-    return users_data
+    return json.loads(users_data)
 
 
 async def fetch_posts_data(url: str):
@@ -34,5 +39,5 @@ async def fetch_posts_data(url: str):
 
     posts_data = await fetch_json(url)
 
-    return posts_data
+    return json.loads(posts_data)
 

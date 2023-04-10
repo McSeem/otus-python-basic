@@ -20,7 +20,12 @@ class Base:
         return str(self)
 
 
-engine = create_engine(url=config.SQLALCHEMY_PG_CONN_URI, echo=config.DB_ECHO)
+db_connection_url = config.SQLALCHEMY_PG_CONN_URI
+
+if config.DB_TYPE is 0:
+    db_connection_url = config.SQLALCHEMY_SQLITE_CONN_URI
+
+engine = create_engine(url=db_connection_url, echo=config.DB_ECHO)
 
 Base = declarative_base(cls=Base, bind=engine)
 

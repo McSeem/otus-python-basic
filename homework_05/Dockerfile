@@ -4,9 +4,9 @@
 # 3. Соберите контейнер с приложением:
 #    docker build . -t homework_05
 # 4. Запустите контейнер:
-#    docker run -it -p 12345:8000 homework_05
+#    docker run -it -p 8000:5000 homework_05
 # 5. Проверить работу приложения:
-#    http://localhost:12345/docs
+#    http://localhost:8000/docs
 
 FROM python:3.10-buster
 
@@ -22,4 +22,4 @@ COPY ../testing/test_homework_05 .
 
 EXPOSE 8000
 
-CMD gunicorn main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+CMD gunicorn wsgi:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:5000

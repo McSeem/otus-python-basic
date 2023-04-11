@@ -30,3 +30,5 @@ urllib3==1.26.14
 uvicorn==0.20.0
 websocket-client==1.5.1
 yarl==1.8.2
+
+Flask~=2.2.3

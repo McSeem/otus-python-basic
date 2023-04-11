@@ -6,7 +6,7 @@
 # 4. Запустите контейнер:
 #    docker run -it -p 8000:5000 homework_05
 # 5. Проверить работу приложения:
-#    http://localhost:8000/docs
+#    http://localhost:8000
 
 FROM python:3.10-buster
 
@@ -18,8 +18,8 @@ RUN apt-get update && \
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY ../testing/test_homework_05 .
+COPY . .
 
 EXPOSE 8000
 
-CMD gunicorn wsgi:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:5000
+CMD gunicorn --bind 0.0.0.0:5000 wsgi:app

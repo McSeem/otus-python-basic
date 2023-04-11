@@ -5,17 +5,19 @@
 import json
 
 import aiohttp
-from urllib.request import urlopen
 
 USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users"
 POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts"
+RESPONSE_STATUS_OK = 200
 
 
-async def fetch_json(url: str):
+async def fetch_json(url: str) -> str:
+    """ Функция получает данные по переданному URL в асинхронном режиме. """
+
     session = aiohttp.ClientSession()
 
     async with session.get(url) as response:
-        if response.status != 200:
+        if response.status != RESPONSE_STATUS_OK:
             response.raise_for_status()
 
         result = await response.text()
@@ -24,7 +26,8 @@ async def fetch_json(url: str):
     return result
 
 
-async def fetch_users_data(url: str):
+async def fetch_users_data(url: str) -> json:
+    """ Функция извлекает данные пользователей по переданному URL. """
     if not url:
         return
 
@@ -33,7 +36,8 @@ async def fetch_users_data(url: str):
     return json.loads(users_data)
 
 
-async def fetch_posts_data(url: str):
+async def fetch_posts_data(url: str) -> json:
+    """ Функция извлекает данные пользовательских постов по переданному URL. """
     if not url:
         return
 

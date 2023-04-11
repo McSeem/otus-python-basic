@@ -3,17 +3,20 @@ from typing import List
 
 from models.models import Post, User
 
-from models.base import Session
-
-""" Для заполнения созданных таблиц users и posts
-    нужно добавлять в сессию сразу несколько записей пачками.
+""" 
+Для заполнения созданных таблиц users и posts
+нужно добавлять в сессию сразу несколько записей пачками.
     
-    Для работы с базовыми операциями CRUD работать с одной записью (объектом)
-    в сессии.
+Для работы с базовыми операциями CRUD работать с одной записью (объектом)
+в сессии.
 """
 
 
 def load_users(users: List) -> List:
+    """
+    Функция подготавливает данные пользователей и формирует
+    их список для загрузки в БД.
+    """
     users_records = []
 
     for user in users:
@@ -29,6 +32,10 @@ def load_users(users: List) -> List:
 
 
 def load_users_posts(posts: List) -> List:
+    """
+    Функция подготавливает данные пользовательских постов и формирует
+    их список для загрузки в БД.
+    """
     posts_records = []
 
     for post in posts:

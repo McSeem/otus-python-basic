@@ -12,11 +12,12 @@
   (используйте полученные из запроса данные, передайте их в функцию для добавления в БД)
 - закрытие соединения с БД
 
-Для включения работы с БД SQLite установите переменную конфига (файл config.py) создайте
-следующие переменные:
-SQLALCHEMY_SQLITE_CONN_URI = "sqlite:///db/blog.db"
-DB_TYPE = 0
-
+Для включения работы с БД SQLite проверьте наличие переменной конфига (файл config.py)
+SQLALCHEMY_SQLITE_CONN_URI = "sqlite:///db/blog.db",
+а также
+DB_TYPE = 0,
+либо
+DB_TYPE = 1 для работы с БД Postgres
 """
 
 import crud
@@ -39,21 +40,31 @@ async def async_main():
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
 
-    print(users_data)
-    print(posts_data)
-
-    #sys.exit()
+    print("Данные пользователей и постов, которые будут добавлены в БД:")
+    print(f"Пользователи: {users_data}")
+    print(f"Посты: {posts_data}")
 
     # Создание сессии работы с БД
     session = Session()
 
-    # Подготовка списков данных пользователей и постов и добавдение их в сессию БД
-    session.add_all(crud.load_users(users_data))
-    session.add_all(crud.load_users_posts(posts_data))
+    session.begin()
 
-    # Запись данных в БД
-    session.commit()
-    session.close()
+    try:
+        # Подготовка списков данных пользователей и постов и добавдение их в сессию БД
+        session.add_all(crud.load_users(users_data))
+        session.add_all(crud.load_users_posts(posts_data))
+    except Exception:
+        session.rollback()
+
+        print("Не удалось добавить загруженные данные в БД")
+
+        raise
+    else:
+        # Запись данных в БД
+        session.commit()
+        session.close()
+
+        print("Данные успешно добавлены")
 
 
 def create_database():

@@ -23,6 +23,7 @@ from homework_04.models import Base
 
 
 class User(Base):
+    """ Класс описывает модель пользователя. """
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     username = Column(String(30), unique=True)
@@ -33,6 +34,7 @@ class User(Base):
 
 
 class Post(Base):
+    """ Класс описывает модель поста пользователя. """
     __tablename__ = "posts"
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"), unique=False)

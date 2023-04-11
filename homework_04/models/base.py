@@ -11,6 +11,9 @@ import config
 
 
 class Base:
+    """ Класс описывает настройки подключения к БД. """
+    DB_TYPE_SQLITE = 0
+
     def __tablename__(cls):
         return f"blog_{cls.__name__.lower()}s"
 
@@ -22,7 +25,7 @@ class Base:
 
 db_connection_url = config.SQLALCHEMY_PG_CONN_URI
 
-if config.DB_TYPE is 0:
+if config.DB_TYPE == Base.DB_TYPE_SQLITE:
     db_connection_url = config.SQLALCHEMY_SQLITE_CONN_URI
 
 engine = create_engine(url=db_connection_url, echo=config.DB_ECHO)

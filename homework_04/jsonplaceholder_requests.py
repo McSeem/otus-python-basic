@@ -18,10 +18,10 @@ async def fetch_json(url: str):
         if response.status != 200:
             response.raise_for_status()
 
-        session.close()
+        result = await response.text()
+    await session.close()
 
-        return await response.text()
-
+    return result
 
 
 async def fetch_users_data(url: str):

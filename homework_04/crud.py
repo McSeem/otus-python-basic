@@ -34,7 +34,7 @@ def load_users_posts(posts: List) -> List:
     for post in posts:
         post_record = Post()
 
-        post_record.user_id = random.randint(1, 10)
+        post_record.user_id = post["userId"]
         post_record.title = post["title"]
         post_record.body = post["body"]
 

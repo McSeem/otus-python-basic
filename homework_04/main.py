@@ -15,10 +15,9 @@
 Для включения работы с БД SQLite установите переменную конфига (файл config.py) создайте
 следующие переменные:
 SQLALCHEMY_SQLITE_CONN_URI = "sqlite:///db/blog.db"
-DB_TYPE = 1
+DB_TYPE = 0
 
 """
-import sys
 
 import crud
 

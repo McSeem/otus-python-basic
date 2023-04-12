@@ -19,12 +19,16 @@ RUN groupadd -g $GID www && \
 WORKDIR /var/app
 
 RUN apt-get update && \
-    apt-get install -y mc
+    apt-get install -y \
+    mc \
+    nano
 
-COPY requirements.txt requirements.txt
+COPY . .
+
+#COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-#COPY . .
+COPY .env_example .env
 
 EXPOSE 8000
 

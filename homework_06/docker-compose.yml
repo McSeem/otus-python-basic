@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data/pgdata
+      - db-data:/var/local/postgresql/data/pgdata
     networks:
       - pythonapp
 

@@ -19,7 +19,7 @@ from sqlalchemy import (
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
-from homework_04.models import Base
+from .base import Base
 
 
 class User(Base):

@@ -1,4 +1,4 @@
-from models.base import Base
+from models.models import *
 
 
 def create_database():

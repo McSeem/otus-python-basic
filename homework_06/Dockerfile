@@ -27,8 +27,6 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-COPY .env_example .env
-
 EXPOSE 8000
 
 CMD gunicorn --bind 0.0.0.0:5000 wsgi:app

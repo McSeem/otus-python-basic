@@ -29,6 +29,6 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-CMD gunicorn --bind 0.0.0.0:5000 wsgi:app
+CMD ["/bin/bash", "start.sh"]
 
 USER www

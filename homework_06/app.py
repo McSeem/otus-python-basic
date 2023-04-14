@@ -11,10 +11,12 @@
 в навигационную панель добавьте ссылки на главную страницу / и на страницу /about/ при помощи url_for
 """
 
+from configuration import config
 from flask import Flask, render_template
 
 
 app = Flask(__name__)
+app.config["DEBUG"] = config.FLASK_DEBUG
 
 
 @app.route("/")

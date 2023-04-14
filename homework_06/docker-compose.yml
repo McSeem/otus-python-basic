@@ -23,6 +23,7 @@ services:
     container_name: python-app-web
     working_dir: /var/app
     environment:
+        STAGE_TYPE: ${ENV_TYPE}
         POSTGRES_HOST: ${POSTGRES_HOST}
         POSTGRES_DB: ${POSTGRES_DB}
         POSTGRES_USER: ${POSTGRES_USER}

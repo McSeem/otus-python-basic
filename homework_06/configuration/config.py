@@ -13,3 +13,6 @@ SQLALCHEMY_SQLITE_CONN_URI = "sqlite:///db/blog.db"
 SQLALCHEMY_BASE_SQLITE_CONN_URI = "sqlite:///db/"
 DB_TYPE = 1
 DB_ECHO = False
+
+ENV_TYPE = os.environ["STAGE_TYPE"]
+FLASK_DEBUG = True if ENV_TYPE == "development" else False

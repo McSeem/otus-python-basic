@@ -20,6 +20,8 @@ DB_TYPE = 0,
 DB_TYPE = 1 для работы с БД Postgres
 """
 
+import os
+
 import crud
 
 import asyncio
@@ -40,9 +42,7 @@ async def async_main():
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
 
-    print("Данные пользователей и постов, которые будут добавлены в БД:")
-    print(f"Пользователи: {users_data}")
-    print(f"Посты: {posts_data}")
+    print(os.listdir("."))
 
     # Создание сессии работы с БД
     session = Session()

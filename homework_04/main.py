@@ -42,7 +42,7 @@ async def async_main():
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
 
-    print(os.listdir("."))
+    print(os.listdir("db"))
 
     # Создание сессии работы с БД
     session = Session()

@@ -27,7 +27,7 @@ import asyncio
 import jsonplaceholder_requests
 
 # from models import Base, Session
-from models.models import *
+from models.models import Base
 from models.base import Session
 
 

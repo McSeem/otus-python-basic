@@ -1,10 +1,10 @@
+from asyncio import current_task
+
 from sqlalchemy import Column, Integer
-from sqlalchemy import create_engine
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_scoped_session
 from sqlalchemy.orm import (
     declarative_base,
     sessionmaker,
-    scoped_session,
 )
 
 import os
@@ -40,4 +40,4 @@ engine = create_async_engine(url=db_connection_url, echo=config.DB_ECHO)
 Base = declarative_base(cls=Base, bind=engine)
 
 session_factory = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
-Session = scoped_session(session_factory)
+Session = async_scoped_session(session_factory, scopefunc=current_task)

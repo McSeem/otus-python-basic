@@ -20,14 +20,14 @@ DB_TYPE = 0,
 DB_TYPE = 1 для работы с БД Postgres
 """
 
+
 import crud
 
 import asyncio
 import jsonplaceholder_requests
 
-# from models import Base, Session
-from models.models import *
-from models.base import Session
+from models.models import Base
+from models.base import engine, Session
 
 
 async def async_main():
@@ -40,19 +40,21 @@ async def async_main():
         jsonplaceholder_requests.fetch_posts_data(jsonplaceholder_requests.POSTS_DATA_URL),
     )
 
-    print("Данные пользователей и постов, которые будут добавлены в БД:")
-    print(f"Пользователи: {users_data}")
-    print(f"Посты: {posts_data}")
+    await create_database()
 
     # Создание сессии работы с БД
     session = Session()
 
-    session.begin()
-
     try:
         # Подготовка списков данных пользователей и постов и добавдение их в сессию БД
-        session.add_all(crud.load_users(users_data))
-        session.add_all(crud.load_users_posts(posts_data))
+        async with session as users_session:
+            async with users_session.begin():
+                session.add_all(crud.load_users(users_data))
+
+        async with session as posts_session:
+            async with posts_session.begin():
+                session.add_all(crud.load_users_posts(posts_data))
+
     except Exception:
         session.rollback()
 
@@ -60,22 +62,18 @@ async def async_main():
 
         raise
     else:
-        # Запись данных в БД
-        session.commit()
-        session.close()
-
         print("Данные успешно добавлены")
 
 
-def create_database():
-    Base.metadata.create_all()
+async def create_database():
+    async with engine.begin() as connection:
+        await connection.run_sync(Base.metadata.drop_all)
+        await connection.run_sync(Base.metadata.create_all)
 
 
 def main():
-    pass
-    create_database()
+    asyncio.run(async_main())
 
 
 if __name__ == "__main__":
     main()
-    asyncio.run(async_main())

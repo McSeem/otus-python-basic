@@ -1,13 +1,18 @@
 from sqlalchemy import Column, Integer
 from sqlalchemy import create_engine
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import (
     declarative_base,
-    declared_attr,
     sessionmaker,
     scoped_session,
 )
 
+import os
 import config
+
+PG_CONN_URI = os.environ.get(
+    'SQLALCHEMY_PG_CONN_URI'
+) or "postgresql+asyncpg://postgres:password@localhost:5432/postgres"
 
 
 class Base:
@@ -28,9 +33,9 @@ db_connection_url = config.SQLALCHEMY_PG_CONN_URI
 if config.DB_TYPE == Base.DB_TYPE_SQLITE:
     db_connection_url = config.SQLALCHEMY_SQLITE_CONN_URI
 
-engine = create_engine(url=db_connection_url, echo=config.DB_ECHO)
+engine = create_async_engine(url=PG_CONN_URI, echo=config.DB_ECHO)
 
 Base = declarative_base(cls=Base, bind=engine)
 
-session_factory = sessionmaker(bind=engine)
+session_factory = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 Session = scoped_session(session_factory)

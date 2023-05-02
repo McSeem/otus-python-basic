@@ -19,12 +19,13 @@ from sqlalchemy import (
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
-from homework_04.models import Base
+from .base import Base
 
 
 class User(Base):
     """ Класс описывает модель пользователя. """
     __tablename__ = "users"
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     username = Column(String(30), unique=True)
     name = Column(String(30), unique=False)
@@ -36,6 +37,7 @@ class User(Base):
 class Post(Base):
     """ Класс описывает модель поста пользователя. """
     __tablename__ = "posts"
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"), unique=False)
     title = Column(String(150), unique=False)

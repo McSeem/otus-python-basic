@@ -12,8 +12,8 @@
   (используйте полученные из запроса данные, передайте их в функцию для добавления в БД)
 - закрытие соединения с БД
 
-Для включения работы с БД SQLite проверьте наличие переменной конфига (файл config.py)
-SQLALCHEMY_SQLITE_CONN_URI = "sqlite:///db/blog.db",
+Для включения работы с БД SQLite (для локальной среды) проверьте наличие переменной конфига (файл config.py)
+SQLALCHEMY_SQLITE_CONN_URI = "sqlite+aiosqlite:///../db/blog.db",
 а также
 DB_TYPE = 0,
 либо
@@ -45,24 +45,32 @@ async def async_main():
     # Создание сессии работы с БД
     session = Session()
 
-    try:
-        # Подготовка списков данных пользователей и постов и добавдение их в сессию БД
-        async with session as users_session:
-            async with users_session.begin():
+    # Подготовка списков данных пользователей и постов и запись их в БД
+    async with session as users_session:
+        async with users_session.begin():
+            try:
                 session.add_all(crud.load_users(users_data))
+            except Exception:
+                await users_session.rollback()
 
-        async with session as posts_session:
-            async with posts_session.begin():
+                print("Не удалось добавить загруженных пользователей в БД")
+
+                raise
+            else:
+                print("Пользователи успешно добавлены")
+
+    async with session as posts_session:
+        async with posts_session.begin():
+            try:
                 session.add_all(crud.load_users_posts(posts_data))
+            except Exception:
+                await posts_session.rollback()
 
-    except Exception:
-        session.rollback()
+                print("Не удалось добавить посты для пользователей в БД")
 
-        print("Не удалось добавить загруженные данные в БД")
-
-        raise
-    else:
-        print("Данные успешно добавлены")
+                raise
+            else:
+                print("Посты для пользователей успешно добавлены")
 
 
 async def create_database():

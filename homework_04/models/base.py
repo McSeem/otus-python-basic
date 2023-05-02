@@ -32,8 +32,10 @@ db_connection_url = config.SQLALCHEMY_PG_CONN_URI
 
 if config.DB_TYPE == Base.DB_TYPE_SQLITE:
     db_connection_url = config.SQLALCHEMY_SQLITE_CONN_URI
+else:
+    db_connection_url = PG_CONN_URI
 
-engine = create_async_engine(url=PG_CONN_URI, echo=config.DB_ECHO)
+engine = create_async_engine(url=db_connection_url, echo=config.DB_ECHO)
 
 Base = declarative_base(cls=Base, bind=engine)
 

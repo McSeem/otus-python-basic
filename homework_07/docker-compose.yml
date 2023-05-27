@@ -33,7 +33,6 @@ services:
         POSTGRES_DB_PORT: ${POSTGRES_DB_PORT}
         POSTGRES_DB_SOCKET: ${POSTGRES_DB_SOCKET}
         POSTGRES_DB_COLLATION: ${POSTGRES_DB_COLLATION}
-#        WWW_ROOT: ${WWW_ROOT}
     volumes:
       - ./:/var/app
     ports:

@@ -1,18 +1,20 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.template import loader
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import ListView
 
 from .models import Question
 
 
-def index(request):
-    question_list = Question.objects.order_by("id")[:5]
+class FilmBaseView(View):
+    model = Question
+    fields = '__all__'
+    success_url = reverse_lazy('questions:all')
 
-    context = {
-        "question_list": question_list,
-    }
 
-    return render(request, "lmsbaikal/index.html", context)
+class QuestionListView(ListView):
 
 
 def detail(request, question_id):

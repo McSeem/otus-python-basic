@@ -10,6 +10,6 @@ echo "Запуск миграций приложения lmsbaikal..."
 python manage.py migrate
 
 # Запуск сервера обработки запросов
-echo "Запуск django..."
+echo "Запуск Django"
 python manage.py runserver 0.0.0.0:8000
 echo "   ... сервер запущен"

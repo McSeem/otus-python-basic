@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
@@ -9,10 +11,12 @@ class Question(models.Model):
     course_module_id = models.IntegerField(default=0)
     tags = ArrayField(models.CharField(max_length=50, default=''))
     penalty = models.FloatField(default=1.0)
+    publication_date = models.DateTimeField("date published", default=datetime.now)
+    changed_date = models.DateTimeField("date changed", default=datetime.now)
 
 
 class QuestionAnswers(models.Model):
-    question_id = models.IntegerField(default=0)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, default=1)
     answer = models.CharField(max_length=500)
     answer_format = models.IntegerField(default=0)
     fraction = models.FloatField(default=1.0)

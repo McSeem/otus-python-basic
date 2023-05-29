@@ -1,15 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
+from django.template import loader
 
 from .models import Question
 
 
 def index(request):
     question_list = Question.objects.order_by("id")[:5]
-    output = ", ".join([q.question_text for q in question_list])
 
-    return HttpResponse(output)
+    context = {
+        "question_list": question_list,
+    }
+
+    return render(request, "lmsbaikal/index.html", context)
 
 
 def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+
+    return render(request, "lmsbaikal/question_detail.html", {"question": question})

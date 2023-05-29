@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if object_list %}
+        <ul class="list-group">
+        {% for question in object_list %}
+            <li class="list-group-item"><a href="/lmsbaikal/{{ question.id }}/">{{ question.question_text }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No questions are available.</p>
+    {% endif %}
+{% endblock %}

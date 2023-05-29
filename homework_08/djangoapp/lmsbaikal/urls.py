@@ -6,6 +6,6 @@ from . import views
 
 
 urlpatterns = [
-    path("", QuestionListView.as_view(), name="all"),
+    path("", QuestionListView.as_view()),
     path("<int:question_id>/", views.detail, name="detail")
 ]

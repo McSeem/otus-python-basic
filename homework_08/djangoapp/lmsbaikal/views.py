@@ -8,13 +8,8 @@ from django.views.generic import ListView
 from .models import Question
 
 
-class FilmBaseView(View):
-    model = Question
-    fields = '__all__'
-    success_url = reverse_lazy('questions:all')
-
-
 class QuestionListView(ListView):
+    model = Question
 
 
 def detail(request, question_id):

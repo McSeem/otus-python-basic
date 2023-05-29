@@ -5,24 +5,7 @@
 #    docker-compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --no-cache
 # 4. Запустите образ:
 #    docker-compose up
-# 5. Запуск миграций:
-#    Во время запуска образа должен быть вывод log-сообщений о миграциях
-#    . . .
-#    Migrations for 'lmsbaikal':
-#    |   lmsbaikal/migrations/0001_initial.py
-#    |     - Create model Question
-#    |     - Create model QuestionAnswers
-#    | Запуск миграций приложения lmsbaikal...
-#    . . .
-#    Operations to perform:
-#    |   Apply all migrations: admin, auth, contenttypes, lmsbaikal, sessions
-#    | Running migrations:
-#    . . .
-#    Applying lmsbaikal.0001_initial... OK
-#    . . .
-# 6. В БД должны появиться кроме системных таблиц Django две таблицы 'lmsbaikal_question' и 'lmsbaikal_questionanswers'
-#    в соответствии с моделями Question и QuestionAnswers из models.py
-# 7. Приложение доступно:
+# 5. Приложение доступно:
 #    http://localhost:8000/lmsbaikal/
 
 FROM python:3.10-buster

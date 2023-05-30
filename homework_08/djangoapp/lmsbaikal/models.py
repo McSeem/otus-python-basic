@@ -9,10 +9,14 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     course_id = models.IntegerField(default=0)
     course_module_id = models.IntegerField(default=0)
-    tags = ArrayField(models.CharField(max_length=50, default=''))
+    tags = ArrayField(models.CharField(max_length=50, default=''), null=True)
     penalty = models.FloatField(default=1.0)
     publication_date = models.DateTimeField("date published", default=datetime.now)
     changed_date = models.DateTimeField("date changed", default=datetime.now)
+
+    def __str__(self):
+
+        return self.name
 
 
 class QuestionAnswers(models.Model):
@@ -22,3 +26,7 @@ class QuestionAnswers(models.Model):
     fraction = models.FloatField(default=1.0)
     feedback = models.CharField(max_length=50, default=0)
     feedback_format = models.IntegerField(default=0)
+
+    def __str__(self):
+
+        return self.answer

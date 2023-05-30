@@ -1,6 +1,15 @@
-<h1>{{ question.question_text }}</h1>
-<ul>
-{% for answer in question.questionanswers_set.all %}
-    <li>{{ answer.answer }}</li>
-{% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ object.question_text }}</h1>
+    {% if object.questionanswers_set.all %}
+        <ul>
+        {% for answer in object.questionanswers_set.all %}
+            <li>{{ answer.answer }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Для данного вопроса ответы находятся в проработке</p>
+    {% endif %}
+    <a class="btn btn-primary" href="/lmsbaikal/" role="button">Список вопросов</a>
+{% endblock %}

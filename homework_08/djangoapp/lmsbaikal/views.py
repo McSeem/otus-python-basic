@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView
 
 from .models import Question
 
@@ -12,7 +12,17 @@ class QuestionListView(ListView):
     model = Question
 
 
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
+class QuestionDetailView(DetailView):
+    model = Question
 
-    return render(request, "lmsbaikal/question_detail.html", {"question": question})
+
+class QuestionNewView(CreateView):
+    model = Question
+    fields = "__all__"
+    success_url = "/lmsbaikal/"
+
+
+class QuestionUpdateView(UpdateView):
+    model = Question
+    fields = "__all__"
+    success_url = "/lmsbaikal/"

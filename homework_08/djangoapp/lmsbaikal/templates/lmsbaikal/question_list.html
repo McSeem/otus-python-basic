@@ -3,10 +3,16 @@
     {% if object_list %}
         <ul class="list-group">
         {% for question in object_list %}
-            <li class="list-group-item"><a href="/lmsbaikal/{{ question.id }}/">{{ question.question_text }}</a></li>
+            <li class="list-group-item">
+                <a href="/lmsbaikal/{{ question.id }}/">{{ question.question_text }}</a>
+                <span>
+                    <a class="btn btn-outline-secondary" href="/lmsbaikal/question-edit/{{ question.id }}/">Редактировать</a>
+                </span>
+            </li>
         {% endfor %}
         </ul>
     {% else %}
-        <p>No questions are available.</p>
+        <p>Вопросов пока нет</p>
     {% endif %}
+<a href="question-add/">Добавить вопрос</a>
 {% endblock %}

@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from .views import QuestionListView
+from .views import QuestionDetailView, QuestionListView, QuestionNewView, QuestionUpdateView
 
 from . import views
 
 
 urlpatterns = [
     path("", QuestionListView.as_view()),
-    path("<int:question_id>/", views.detail, name="detail")
+    path("<int:pk>/", QuestionDetailView.as_view()),
+    path("question-add/", QuestionNewView.as_view()),
+    path("question-edit/<int:pk>/", QuestionUpdateView.as_view())
 ]

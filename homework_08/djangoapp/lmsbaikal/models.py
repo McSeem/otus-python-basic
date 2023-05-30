@@ -1,4 +1,5 @@
 from datetime import datetime
+from itertools import count
 
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -9,7 +10,7 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     course_id = models.IntegerField(default=0)
     course_module_id = models.IntegerField(default=0)
-    tags = ArrayField(models.CharField(max_length=50, default=''), null=True)
+    tags = ArrayField(models.CharField(max_length=50, default=''), default=list, null=True)
     penalty = models.FloatField(default=1.0)
     publication_date = models.DateTimeField("date published", default=datetime.now)
     changed_date = models.DateTimeField("date changed", default=datetime.now)
@@ -17,6 +18,10 @@ class Question(models.Model):
     def __str__(self):
 
         return self.name
+
+    def get_tags_count(self):
+
+        return len(self.tags)
 
 
 class QuestionAnswers(models.Model):

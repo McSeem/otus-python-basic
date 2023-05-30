@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 
-from .models import Question
+from .models import Question, QuestionAnswers
 
 
 class QuestionListView(ListView):
@@ -24,5 +24,11 @@ class QuestionNewView(CreateView):
 
 class QuestionUpdateView(UpdateView):
     model = Question
+    fields = "__all__"
+    success_url = "/lmsbaikal/"
+
+
+class QuestionAnswersAddView(CreateView):
+    model = QuestionAnswers
     fields = "__all__"
     success_url = "/lmsbaikal/"

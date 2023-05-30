@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+    <title>Страница вопроса</title>
+    {% endblock %}
+
 {% block content %}
     <h1>{{ object.question_text }}</h1>
     {% if object.questionanswers_set.all %}
@@ -11,5 +15,6 @@
     {% else %}
         <p>Для данного вопроса ответы находятся в проработке</p>
     {% endif %}
+    <a href="/lmsbaikal/question-edit/{{ question.id }}/answer-add">Добавить ответ</a>
     <a class="btn btn-primary" href="/lmsbaikal/" role="button">Список вопросов</a>
 {% endblock %}

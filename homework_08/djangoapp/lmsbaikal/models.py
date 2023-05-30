@@ -20,5 +20,5 @@ class QuestionAnswers(models.Model):
     answer = models.CharField(max_length=500)
     answer_format = models.IntegerField(default=0)
     fraction = models.FloatField(default=1.0)
-    feedback = models.CharField(max_length=50)
+    feedback = models.CharField(max_length=50, default=0)
     feedback_format = models.IntegerField(default=0)

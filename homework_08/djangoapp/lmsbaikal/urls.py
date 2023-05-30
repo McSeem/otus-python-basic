@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.urls import path
 from .views import QuestionDetailView, QuestionListView, QuestionNewView, QuestionUpdateView, QuestionAnswersAddView
 
-from . import views
-
 
 urlpatterns = [
     path("", QuestionListView.as_view()),

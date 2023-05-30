@@ -1,5 +1,5 @@
 from datetime import datetime
-from itertools import count
+from django.utils import timezone
 
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -12,8 +12,8 @@ class Question(models.Model):
     course_module_id = models.IntegerField(default=0)
     tags = ArrayField(models.CharField(max_length=50, default=''), default=list, null=True)
     penalty = models.FloatField(default=1.0)
-    publication_date = models.DateTimeField("date published", default=datetime.now)
-    changed_date = models.DateTimeField("date changed", default=datetime.now)
+    publication_date = models.DateTimeField("date published", default=timezone.now)
+    changed_date = models.DateTimeField("date changed", default=timezone.now)
 
     def __str__(self):
 
